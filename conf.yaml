@@ -1,8 +1,11 @@
 # 配置读取model
 confs:
   - name: "330_67"
-    yolo: "/content/drive/MyDrive/bi-seq-202302/standing2lying/weight/best330v8.pt"
-    resnet: "/content/drive/MyDrive/bi-seq-202302/standing2lying/weight/ResNet50_best.h5"
+    yolo: "/content/drive/MyDrive/Colab/Notebooks//test/s2l/standing2lying/weight/best324v8.pt"
+    resnet: "/content/drive/MyDrive/Colab/Notebooks//test/s2l/standing2lying/weight/57-ResNet50_best"
   - name: "324_65"
-    yolo: "/content/drive/MyDrive/bi-seq-202302/standing2lying/weight/best324v8.pt"
-    resnet: "/content/drive/MyDrive/bi-seq-202302/standing2lying/weight/ResNet50_best.bak7.h5"
+    yolo: "/content/drive/MyDrive/Colab/Notebooks//test/s2l/standing2lying/weight/best324v8.pt"
+    resnet: "/content/drive/MyDrive/Colab/Notebooks//test/s2l/standing2lying/weight/69-ResNet50_best.h5"
+  - name: "330_67"
+    yolo: "/content/drive/MyDrive/Colab/Notebooks//test/s2l/standing2lying/weight/best324v8.pt"
+    resnet: "/content/drive/MyDrive/Colab/Notebooks//test/s2l/standing2lying/weight/ResNet50_best.h5"
