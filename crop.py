@@ -5,7 +5,7 @@ import cv2
 # def get_crop(ret):
 
 
-def get_crop(v8model, img, video_path='', frame=0, framesDir='/content/drive/MyDrive/bi-seq-202302/standing2lying/frames', save=False):
+def get_crop(v8model, img, video_path='', frame=0, framesDir='/content/drive/MyDrive/bi-seq-202302/standing2lying/frames', save=False, modelCombinationName=''):
     try:
         [ret] = v8model(img, conf=0.5)
         #[ret] = v8model(img, conf=0.6, max_det=1, save=True)
@@ -38,7 +38,7 @@ def get_crop(v8model, img, video_path='', frame=0, framesDir='/content/drive/MyD
                                 '-' + str(frame) + '-' + str(inx) + '.jpg')
             print('dir path: ', path)
             pathFullImg = os.path.join(framesDir, filename +
-                                       '-' + str(frame) + '.jpg')
+                                       '-' + str(frame) + '-' + modelCombinationName + '.jpg')
             cv2.imwrite(pathFullImg, img)
             cv2.imwrite(path, crop_img)
         return crop_img

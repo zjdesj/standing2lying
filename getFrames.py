@@ -12,7 +12,7 @@ v8model = getV8()
 # 从视频获取单帧
 
 
-def getFrame(v8model, num, cap, video_path='', framesDir=''):
+def getFrame(v8model, num, cap, video_path='', framesDir='', modelCombinationName=''):
     print('--当前帧---', num)
     cap.set(cv2.CAP_PROP_POS_FRAMES, num)
     ret_val, img0 = cap.read()
@@ -20,7 +20,8 @@ def getFrame(v8model, num, cap, video_path='', framesDir=''):
     #img0 = cv2.cvtColor(img0, cv2.COLOR_BGR2GRAY)
 
     #img01 = get_crop(v8model, img0, True)
-    img01 = get_crop(v8model, img0, video_path, num, framesDir, True)
+    img01 = get_crop(v8model, img0, video_path, num,
+                     framesDir, True, modelCombinationName)
     print('--当前帧结束--', num)
     return img01
 
