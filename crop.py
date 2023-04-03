@@ -33,7 +33,7 @@ def get_crop(v8model, img, video_path='', frame=0, framesDir='/content/drive/MyD
         crop_img = img[y1: y1 + h1, x1: x1 + w1]
         if save:
             filename = os.path.split(video_path)[1].strip('.mp4')
-            print('filename :', filename)
+            #print('filename :', filename)
             path = os.path.join(framesDir, filename +
                                 '-' + str(frame) + '-' + str(inx) + '.jpg')
             print('dir path: ', path)

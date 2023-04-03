@@ -192,7 +192,6 @@ def getCorpedFrames(videoDir, framesDir):
     sa = []
 
     for root, dirs, files in os.walk(videoDir):
-        print(files)
         for file in files:
 
             source_path = os.path.join(root, file)

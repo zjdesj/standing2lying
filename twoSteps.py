@@ -91,7 +91,6 @@ def getModelInstances(confs):
         print(conf["yolo"], conf["resnet"])
         conf["yolo"] = getV8(conf["yolo"])
         conf["resnet"] = loadResnet(conf["resnet"])
-    print(confs)
     return confs
 
 
