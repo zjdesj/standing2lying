@@ -228,6 +228,7 @@ if __name__ == '__main__':
     # 需要确定的地址
     #videoDir = '/content/drive/MyDrive/bi-seq-202302/videos/316videos/me'
     #videoDir = '/content/video'
-    framesDir = '/content/drive/MyDrive/bi-seq-202302/standing2lying/img/'
+    #framesDir = '/content/drive/MyDrive/bi-seq-202302/standing2lying/img/'
+    framesDir = './img/'
     print('framesDir: ', framesDir)
     getCorpedFrames(videoDir, framesDir)

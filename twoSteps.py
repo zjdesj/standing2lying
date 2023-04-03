@@ -15,7 +15,7 @@ import yaml
 from crop import get_crop
 from loadModel import getV8, loadResnet
 from getFrames import getFrame
-from keras.preprocessing import image
+from keras.utils import img_to_array
 
 
 def getConfs():
@@ -42,7 +42,7 @@ def img2Array(img):
         #img2 = cv2.resize(img, (224, 224), interpolation=cv2.INTER_AREA)
         img2 = cv2.resize(img, (224, 224), interpolation=cv2.INTER_NEAREST)
 
-        x = image.img_to_array(img2)
+        x = img_to_array(img2)
         #x = np.expand_dims(img2, axis=2).repeat(3, axis=2)
         x = np.expand_dims(x, axis=0)
         return x
