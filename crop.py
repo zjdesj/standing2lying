@@ -35,10 +35,10 @@ def get_crop(v8model, img, video_path='', frame=0, framesDir='/content/drive/MyD
             filename = os.path.split(video_path)[1].strip('.mp4')
             #print('filename :', filename)
             path = os.path.join(framesDir, filename +
-                                '-' + str(frame) + '-' + str(inx) + '.jpg')
+                                '-' + str(frame) + '-' + str(inx) + '-' + modelCombinationName + '.jpg')
             print('dir path: ', path)
             pathFullImg = os.path.join(framesDir, filename +
-                                       '-' + str(frame) + '-' + modelCombinationName + '.jpg')
+                                       '-' + str(frame) + '.jpg')
             cv2.imwrite(pathFullImg, img)
             cv2.imwrite(path, crop_img)
         return crop_img
