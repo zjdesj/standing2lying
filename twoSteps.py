@@ -126,7 +126,7 @@ def processVideo(videoPath):
         tmp = []
         for models in modelsArr:
             v8model = models["yolo"]
-            resnetModel = models("resnet")
+            resnetModel = models["resnet"]
 
             imgArray = getImgArray(v8model, img0)
 
@@ -163,7 +163,7 @@ def processVideoKeyFrames(videoPath, frames, framesDir):
         tmp = []
         for models in modelsArr:
             v8model = models["yolo"]
-            resnetModel = models("resnet")
+            resnetModel = models["resnet"]
             imgArray = img2Array(
                 getFrame(v8model, frame, cap, videoPath, framesDir))
             predictRet = resnetPredict(resnetModel, imgArray)
