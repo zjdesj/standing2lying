@@ -73,11 +73,16 @@ def resnetPredict(model, x):
 
 
 def saveRet(data, videoPath):
+    confs = getConfs()
     name = os.path.splitext(videoPath)[0]
     name = os.path.split(name)[1] + '_' + str(time.time()) + '.csv'
     print(name)
-
-    df = pd.DataFrame(data, columns=['ind', 'preds', 'results', 'time'])
+    cols = ['ind']
+    for item in confs:
+        cols.add(item.name)
+        cols.add(item.name + '_val')
+    cols = cols + ['results', 'time']
+    df = pd.DataFrame(data, columns=cols)
     df.to_csv(
         '/content/drive/MyDrive/bi-seq-202302/standing2lying/results-0401/' + name)
 
@@ -89,12 +94,14 @@ def getModelInstances(confs):
         conf["yolo"] = getV8(conf["yolo"])
         conf["resnet"] = loadResnet(conf["resnet"])
     print(arr)
+    return arr
 
 
 def processVideo(videoPath):
-
-    v8model = getV8()
-    resnetModel = loadResnet()
+    confs = getConfs()
+    modelsArr = getModelInstances(confs)
+    #v8model = getV8()
+    #resnetModel = loadResnet()
 
     cap = getVideo(videoPath)
 
@@ -117,11 +124,17 @@ def processVideo(videoPath):
 
         item = [count]
 
-        imgArray = getImgArray(v8model, img0)
+        tmp = []
+        for models in modelsArr:
+            v8model = models["yolo"]
+            resnetModel = models("resnet")
 
-        predictRet = resnetPredict(resnetModel, imgArray)
+            imgArray = getImgArray(v8model, img0)
 
-        item = item + predictRet
+            predictRet = resnetPredict(resnetModel, imgArray)
+            tmp.add(predictRet)
+
+        item = item + tmp
         ret_val, img0 = cap.read()
         end_time = time.time()
         item.append(end_time - start_time)
