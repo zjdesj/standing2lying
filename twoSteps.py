@@ -62,7 +62,6 @@ def resnetPredict(model, x):
     item = []
     preds = model.predict(x)
 
-    print('preds', preds)
     [[a, b]] = preds
     item.append([a, b])
 
@@ -75,10 +74,9 @@ def resnetPredict(model, x):
 
 def saveRet(data, videoPath):
     confs = getConfs()
-    print('saveRet confs', confs)
     name = os.path.splitext(videoPath)[0]
     name = os.path.split(name)[1] + '_' + str(time.time()) + '.csv'
-    print(name)
+    print('saved file\'s name:', name)
     cols = ['ind']
     for item in confs:
         cols = cols + [item["name"], item["name"] + '_val']
@@ -133,7 +131,6 @@ def processVideo(videoPath):
 
             [[pred], pose] = resnetPredict(resnetModel, imgArray)
             tmp.append(pred, pose)
-            print('1222 tmp: ', tmp)
 
         item = item + tmp
         ret_val, img0 = cap.read()
@@ -164,19 +161,13 @@ def processVideoKeyFrames(videoPath, frames, framesDir):
 
         tmp = []
         for models in modelsArr:
-            print('.....', models)
             v8model = models["yolo"]
             resnetModel = models["resnet"]
             imgArray = img2Array(
                 getFrame(v8model, frame, cap, videoPath, framesDir))
-            #[pred, pose] = resnetPredict(resnetModel, imgArray)
-            #tmp.append(pred, pose)
-            #print('1222 tmp: ', tmp)
             predictRet = resnetPredict(resnetModel, imgArray)
             tmp = tmp + predictRet
-        print('tmp predict: ', tmp)
         item = item + tmp
-        print('item + tmp: ', item)
         end_time = time.time()
         item.append(end_time - start_time)
         ret.append(item)
