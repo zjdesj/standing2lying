@@ -1,0 +1,6 @@
+# 配置读取model
+confs:
+  - yolo: "/content/drive/MyDrive/bi-seq-202302/standing2lying/weight/best330v8.pt"
+    resnet: "/content/drive/MyDrive/bi-seq-202302/standing2lying/weight/ResNet50_best.h5"
+  - yolo: "/content/drive/MyDrive/bi-seq-202302/standing2lying/weight/best324v8.pt"
+    resnet: "/content/drive/MyDrive/bi-seq-202302/standing2lying/weight/ResNet50_best.bak7.h5"

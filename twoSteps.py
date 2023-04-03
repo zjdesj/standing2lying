@@ -10,11 +10,19 @@ import pandas as pd
 import cv2
 import numpy as np
 import time
+import yaml
 
 from crop import get_crop
 from loadModel import getV8, loadResnet
 from getFrames import getFrame
 from keras.preprocessing import image
+
+
+def getConfs():
+    with open('./conf.yaml', 'r') as f:
+        confs = yaml.load(f, Loader=yaml.FullLoader)
+
+    return confs
 
 
 def getVideo(videoPath):
@@ -74,7 +82,17 @@ def saveRet(data, videoPath):
         '/content/drive/MyDrive/bi-seq-202302/standing2lying/results-0401/' + name)
 
 
+def getModelInstances(confs):
+    arr = confs["confs"]
+    for conf in arr:
+        print(conf["yolo"], conf["resnet"])
+        conf["yolo"] = getV8(conf["yolo"])
+        conf["resnet"] = loadResnet(conf["resnet"])
+    print(arr)
+
+
 def processVideo(videoPath):
+
     v8model = getV8()
     resnetModel = loadResnet()
 
@@ -145,4 +163,6 @@ if __name__ == '__main__':
     video_path = '/content/drive/MyDrive/bi-seq-202302/videos/316videos/D01_20210519190605.mp4'
     short_path = '/content/drive/MyDrive/bi-seq-202302/videos/short.mp4'
     print('在这使用path', video_path)
-    processVideo(video_path)
+    # processVideo(video_path)
+    confs = getConfs()
+    getModelInstances(confs)
