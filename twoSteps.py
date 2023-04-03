@@ -80,7 +80,7 @@ def saveRet(data, videoPath):
     print(name)
     cols = ['ind']
     for item in confs:
-        cols = cols + [item.name, item.name + '_val']
+        cols = cols + [item["name"], item["name"] + '_val']
     cols = cols + ['results', 'time']
     df = pd.DataFrame(data, columns=cols)
     df.to_csv(
