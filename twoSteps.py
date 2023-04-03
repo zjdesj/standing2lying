@@ -160,9 +160,10 @@ def processVideoKeyFrames(videoPath, frames, framesDir):
 
 if __name__ == '__main__':
     #video_path = '/content/drive/MyDrive/bi-seq-202302/videos/D01_20210519140930.mp4'
-    video_path = '/content/drive/MyDrive/bi-seq-202302/videos/316videos/D01_20210519190605.mp4'
-    short_path = '/content/drive/MyDrive/bi-seq-202302/videos/short.mp4'
-    print('在这使用path', video_path)
+    #video_path = '/content/drive/MyDrive/bi-seq-202302/videos/316videos/D01_20210519190605.mp4'
+    #short_path = '/content/drive/MyDrive/bi-seq-202302/videos/short.mp4'
+    #print('在这使用path', video_path)
+
     # processVideo(video_path)
     confs = getConfs()
     getModelInstances(confs)
