@@ -12,7 +12,7 @@ v8model = getV8()
 # 从视频获取单帧
 
 
-def getFrame(num, cap, video_path='', framesDir=''):
+def getFrame(v8model, num, cap, video_path='', framesDir=''):
     print('--当前帧---', num)
     cap.set(cv2.CAP_PROP_POS_FRAMES, num)
     ret_val, img0 = cap.read()
@@ -40,7 +40,7 @@ def getBatchFramesFromSingleVideo(arr, video_path, framesDir='/content/drive/MyD
     for item in arr:
         if item >= frames:
             return
-        img = getFrame(item, cap, video_path, framesDir)
+        img = getFrame(v8model, item, cap, video_path, framesDir)
 
 # 从多视频获取多帧
 
