@@ -1,0 +1,7 @@
+把这些脚本及weight文件夹放到drive上，要使用的model 权重文件都放到weight里边，名称要固定。
+------
+在colab上切到对应文件夹执行：!python twoSteps.py  &> (name).log  就能执行单视频，(name).log为自己存的执行日志。从日志最后一行找到执行结果存储文件名。
+------
+getFrames.py 为可执行文件，用于获取帧。
+---------
+多文件执行程序 !python batchInference.py &> (name).log (name).log为自己存的执行日志。 
