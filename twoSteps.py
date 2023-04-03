@@ -131,7 +131,7 @@ def processVideo(videoPath):
 
             imgArray = getImgArray(v8model, img0)
 
-            [pred, pose] = resnetPredict(resnetModel, imgArray)
+            [[pred], pose] = resnetPredict(resnetModel, imgArray)
             tmp.append(pred, pose)
             print('1222 tmp: ', tmp)
 
@@ -169,8 +169,11 @@ def processVideoKeyFrames(videoPath, frames, framesDir):
             resnetModel = models["resnet"]
             imgArray = img2Array(
                 getFrame(v8model, frame, cap, videoPath, framesDir))
+            #[pred, pose] = resnetPredict(resnetModel, imgArray)
+            #tmp.append(pred, pose)
+            #print('1222 tmp: ', tmp)
             predictRet = resnetPredict(resnetModel, imgArray)
-            tmp.append(predictRet)
+            tmp = tmp + predictRet
         print('tmp predict: ', tmp)
         item = item + tmp
         print('item + tmp: ', item)
