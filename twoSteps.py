@@ -168,7 +168,7 @@ def processVideoKeyFrames(videoPath, frames, framesDir):
             imgArray = img2Array(
                 getFrame(v8model, frame, cap, videoPath, framesDir))
             predictRet = resnetPredict(resnetModel, imgArray)
-            tmp.append(predictRet)
+            tmp.append(predictRet.values)
         print('tmp predict: ', tmp)
         item = item + tmp
         end_time = time.time()
