@@ -74,6 +74,7 @@ def resnetPredict(model, x):
 
 def saveRet(data, videoPath):
     confs = getConfs()
+    print('saveRet confs', confs)
     name = os.path.splitext(videoPath)[0]
     name = os.path.split(name)[1] + '_' + str(time.time()) + '.csv'
     print(name)
