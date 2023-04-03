@@ -132,7 +132,8 @@ def processVideo(videoPath):
             imgArray = getImgArray(v8model, img0)
 
             predictRet = resnetPredict(resnetModel, imgArray)
-            tmp = tmp + predictRet
+            tmp = [...tmp, ...predictRet]
+            print('1222 tmp: ', tmp)
 
         item = item + tmp
         ret_val, img0 = cap.read()
