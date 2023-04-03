@@ -64,7 +64,7 @@ def resnetPredict(model, x):
 
     print('preds', preds)
     [[a, b]] = preds
-    item.append(preds.tolist()[0])
+    item.append([a, b])
 
     if a > b:
         item.append(0)
@@ -132,7 +132,7 @@ def processVideo(videoPath):
             imgArray = getImgArray(v8model, img0)
 
             predictRet = resnetPredict(resnetModel, imgArray)
-            tmp.append(predictRet)
+            tmp = tmp + predictRet
 
         item = item + tmp
         ret_val, img0 = cap.read()
