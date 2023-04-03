@@ -64,7 +64,7 @@ def resnetPredict(model, x):
 
     print('preds', preds)
     [[a, b]] = preds
-    item.append(preds.tolist())
+    item.append(preds.tolist()[0])
 
     if a > b:
         item.append(0)
