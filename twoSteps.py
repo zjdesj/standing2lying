@@ -82,7 +82,7 @@ def saveRet(data, videoPath):
     cols = ['ind']
     for item in confs:
         cols = cols + [item["name"], item["name"] + '_val']
-    cols = cols + ['results', 'time']
+    cols = cols + ['time']
     df = pd.DataFrame(data, columns=cols)
     df.to_csv(
         '/content/drive/MyDrive/bi-seq-202302/standing2lying/results-test/' + name)
