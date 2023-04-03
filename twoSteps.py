@@ -22,7 +22,7 @@ def getConfs():
     with open('./conf.yaml', 'r') as f:
         confs = yaml.load(f, Loader=yaml.FullLoader)
 
-    return confs
+    return confs["confs"]
 
 
 def getVideo(videoPath):
@@ -87,13 +87,12 @@ def saveRet(data, videoPath):
 
 
 def getModelInstances(confs):
-    arr = confs["confs"]
-    for conf in arr:
+    for conf in confs:
         print(conf["yolo"], conf["resnet"])
         conf["yolo"] = getV8(conf["yolo"])
         conf["resnet"] = loadResnet(conf["resnet"])
-    print(arr)
-    return arr
+    print(confs)
+    return confs
 
 
 def processVideo(videoPath):
