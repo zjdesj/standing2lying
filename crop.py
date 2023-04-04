@@ -37,9 +37,9 @@ def get_crop(v8model, img, video_path='', frame=0, framesDir='/content/drive/MyD
             path = os.path.join(framesDir, filename +
                                 '-' + str(frame) + '-' + str(inx) + '-' + modelCombinationName + '.jpg')
             print('dir path: ', path)
-            pathFullImg = os.path.join(framesDir, filename +
-                                       '-' + str(frame) + '.jpg')
-            cv2.imwrite(pathFullImg, img)
+            # pathFullImg = os.path.join(framesDir, filename +
+            #                           '-' + str(frame) + '.jpg')
+            #cv2.imwrite(pathFullImg, img)
             cv2.imwrite(path, crop_img)
         return crop_img
     except:

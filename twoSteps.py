@@ -33,7 +33,7 @@ def getVideo(videoPath):
     print('fps = ', fps)
     print('frames = ', frames)
     print('--- end: video 信息：')
-    return cap
+    return [cap, frames]
 
 
 def img2Array(img):
@@ -83,7 +83,7 @@ def saveRet(data, videoPath):
     cols = cols + ['time']
     df = pd.DataFrame(data, columns=cols)
     df.to_csv(
-        '/content/drive/MyDrive/bi-seq-202302/standing2lying/results/' + name)
+        '/content/drive/MyDrive/bi-seq-202302/standing2lying/results-final/' + name)
 
 
 def getModelInstances(confs):
@@ -149,7 +149,8 @@ def processVideoKeyFrames(videoPath, frames, framesDir):
     modelsArr = getModelInstances(confs)
     #resnetModel = loadResnet()
 
-    cap = getVideo(videoPath)
+    [cap, frameNum] = getVideo(videoPath)
+
     time0 = time.time()
 
     ret = []
@@ -175,6 +176,7 @@ def processVideoKeyFrames(videoPath, frames, framesDir):
     print("总耗时: {:.2f}秒".format(time1 - time0))
 
     saveRet(ret, videoPath)
+    return frameNum
 
 
 if __name__ == '__main__':

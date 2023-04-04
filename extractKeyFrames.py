@@ -2,6 +2,7 @@ import time
 
 import cv2
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 import os
 import sys
@@ -189,7 +190,7 @@ class KeyFrameGetter:
 
 
 def getCorpedFrames(videoDir, framesDir):
-    sa = []
+    framesArr = []
 
     for root, dirs, files in os.walk(videoDir):
         for file in files:
@@ -210,7 +211,8 @@ def getCorpedFrames(videoDir, framesDir):
             kfg.load_diff_between_frm(alpha=0.07)  # 获取模型参数
             print(kfg.idx)
 
-            processVideoKeyFrames(source_path, kfg.idx, dir_path)
+            frameNum = processVideoKeyFrames(source_path, kfg.idx, dir_path)
+            framesArr.append([file, frameNum])
             #b = time.time()
             #sa.append(b - a)
             # 耗时统计
@@ -219,6 +221,10 @@ def getCorpedFrames(videoDir, framesDir):
 
             # 此语句是打印每一个图片的差分信息
             kfg.plot_diff_time()
+    cols = ['file', 'count']
+    df = pd.DataFrame(framesArr, columns=cols)
+    df.to_csv(
+        '/content/drive/MyDrive/bi-seq-202302/standing2lying/results-final/framesStatistics.csv')
 
 
 if __name__ == '__main__':
@@ -227,6 +233,6 @@ if __name__ == '__main__':
     # 需要确定的地址
     #videoDir = '/content/drive/MyDrive/bi-seq-202302/videos/316videos/me'
     #videoDir = '/content/video'
-    framesDir = '/content/drive/MyDrive/bi-seq-202302/standing2lying/img/'
+    framesDir = '/content/drive/MyDrive/bi-seq-202302/standing2lying/img-final/'
     print('framesDir: ', framesDir)
     getCorpedFrames(videoDir, framesDir)
