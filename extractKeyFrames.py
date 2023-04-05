@@ -193,7 +193,7 @@ def getCorpedFrames(videoDir, framesDir):
     framesArr = []
 
     for root, dirs, files in os.walk(videoDir):
-        for file in files:
+        for file in sorted(files):
 
             source_path = os.path.join(root, file)
             dir_path = framesDir + file.strip('.avi').strip('.mp4')  # + '/'
