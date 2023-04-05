@@ -203,7 +203,8 @@ def getCorpedFrames(videoDir, framesDir):
             print("目的文件路径为", dir_path)
 
             if os.path.exists(dir_path):
-                os.rename(dir_path, dir_path + '.bak.' + str(time.time()))
+                continue
+                #os.rename(dir_path, dir_path + '.bak.' + str(time.time()))
             os.makedirs(dir_path)
 
             kfg = KeyFrameGetter(source_path, dir_path, 100)
