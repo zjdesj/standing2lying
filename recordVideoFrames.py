@@ -7,7 +7,7 @@ def getVideoFrames(videoDir, dir):
     ret = []
     files = os.listdir(videoDir)
     for file in files:
-        cap = cv2.VideoCapture(file)
+        cap = cv2.VideoCapture(os.path.join(videoDir, file))
         frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
         ret.append({"name": file, "frames": frames})
         print('--- start: video 信息：')
