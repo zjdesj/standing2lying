@@ -1,9 +1,10 @@
 import sys
 import os
 import cv2
+import pandas as pd
 
 
-def getVideoFrames(videoDir, dir):
+def getVideoFrames(videoDir):
     ret = []
     files = os.listdir(videoDir)
     for file in files:
@@ -15,6 +16,12 @@ def getVideoFrames(videoDir, dir):
         print('frames = ', frames)
         print('--- end: video 信息：')
     print(ret)
+    return ret
+
+
+def saveRet(data, dir):
+    df = pd.DataFrame(data)
+    df.to_csv(os.path.join(dir, 'videoFrames.csv'))
 
 
 if __name__ == '__main__':
@@ -24,4 +31,5 @@ if __name__ == '__main__':
     #videoDir = '/content/drive/MyDrive/bi-seq-202302/videos/316videos/me'
     #videoDir = '/content/video'
     dir = '/content/drive/MyDrive/bi-seq-202302/standing2lying/'
-    getVideoFrames(videoDir, dir)
+    data = getVideoFrames(videoDir)
+    saveRet(data, dir)
