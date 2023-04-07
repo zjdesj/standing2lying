@@ -196,7 +196,8 @@ def getCorpedFrames(videoDir, framesDir):
         for file in sorted(files):
 
             source_path = os.path.join(root, file)
-            dir_path = framesDir + file.strip('.avi').strip('.mp4')  # + '/'
+            # dir_path = framesDir + file.strip('.avi').strip('.mp4')  # + '/'
+            dir_path = framesDir + os.path.splitext(file)[0]  # + '/'
 
             print("源文件目录为", root)
             print("源文件路径为", source_path)
