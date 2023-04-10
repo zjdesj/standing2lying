@@ -93,8 +93,13 @@ def processVideoByKeyFrames(video_path, retDir, frames):
         # 可存储
         [results] = v8model(img)
         rr = results.boxes
-        tmp = [frame, len(rr.boxes), int(rr.cls[0].item()),
-               rr.conf[0].item(), rr.cls.tolist()]
+        cls = -1
+        con = -1
+        if len(rr.cls):
+            cls = int(rr.cls[0].item())
+            con = rr.conf[0].item()
+        tmp = [len(rr.boxes), cls, con, rr.cls.tolist()]
+
         ret.append(tmp)
     saveRet(ret, video_path, retDir)
     b = time.time()
