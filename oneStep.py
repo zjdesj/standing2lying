@@ -90,9 +90,10 @@ def processVideoByKeyFrames(video_path, retDir, frames):
         print('frame no:', frame)
         cap.set(cv2.CAP_PROP_POS_FRAMES, frame)
         ret_val, img = cap.read()
+        # 可存储
         [results] = v8model(img)
         rr = results.boxes
-        tmp = [len(rr.boxes), int(rr.cls[0].item()),
+        tmp = [frame, len(rr.boxes), int(rr.cls[0].item()),
                rr.conf[0].item(), rr.cls.tolist()]
         ret.append(tmp)
     saveRet(ret, video_path, retDir)
