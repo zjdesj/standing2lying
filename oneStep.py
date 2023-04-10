@@ -87,7 +87,7 @@ def processVideos(videoDir, framesDir):
 
             a = time.time()
 
-            v8model(source_path, save=True, save_txt=True, save_conf=True)
+            v8model(source_path, save_txt=True, save_conf=True)
 
 
 if __name__ == '__main__':
