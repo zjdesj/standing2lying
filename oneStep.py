@@ -87,11 +87,11 @@ def processVideoByKeyFrames(video_path, retDir, frames):
     cap = cv2.VideoCapture(video_path)
 
     for frame in frames:
+        print('frame no:', frame)
         cap.set(cv2.CAP_PROP_POS_FRAMES, frame)
         ret_val, img = cap.read()
         [results] = v8model(img)
         rr = results.boxes
-        print('fffffff', rr)
         tmp = [len(rr.boxes), int(rr.cls[0].item()),
                rr.conf[0].item(), rr.cls.tolist()]
         ret.append(tmp)
