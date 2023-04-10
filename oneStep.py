@@ -52,9 +52,10 @@ def processVideoKeyFramesByOne(videoPath, frames, framesDir):
         start_time = time.time()
 
         img = getFrame(v8model, frame, cap)
+
         [v8ret] = v8model(img, save=True, save_txt=True, save_conf=True)
-        print('v8ret.boxes::', v8ret.boxes)
-        print('v8ret.probs::', v8ret.probs)
+        #print('v8ret.boxes::', v8ret.boxes)
+        print('v8ret.probs::', v8ret.classes)
 
         end_time = time.time()
         item.append(end_time - start_time)
@@ -65,3 +66,35 @@ def processVideoKeyFramesByOne(videoPath, frames, framesDir):
 
     saveRet(ret, videoPath)
     return frameNum
+
+
+def processVideos(videoDir, framesDir):
+    v8model = getV8()
+    framesArr = []
+    for root, dirs, files in os.walk(videoDir):
+        for file in sorted(files):
+            source_path = os.path.join(root, file)
+            dir_path = framesDir + os.path.splitext(file)[0]  # + '/'
+
+            print("源文件目录为", root)
+            print("源文件路径为", source_path)
+            print("目的文件路径为", dir_path)
+
+            if os.path.exists(dir_path):
+                # continue
+                os.rename(dir_path, dir_path + '.bak.' + str(time.time()))
+            os.makedirs(dir_path)
+
+            a = time.time()
+
+            v8model(source_path, save=True, save_txt=True, save_conf=True)
+
+
+if __name__ == '__main__':
+    #videoDir = sys.argv[1]
+    # 需要确定的地址
+    #videoDir = '/content/drive/MyDrive/bi-seq-202302/videos/316videos/me'
+    videoDir = './video'
+    framesDir = './img/'
+    print('framesDir: ', framesDir)
+    processVideos(videoDir, framesDir)
