@@ -87,7 +87,11 @@ def processVideos(videoDir, framesDir):
 
             a = time.time()
 
-            v8model(source_path, save_txt=True, save_conf=True)
+            results = v8model(source_path, stream=True,
+                              save_txt=True, save_conf=True)
+            for r in results:
+                print('r.boxes:::', r.boxes)
+                print('r.probs:::', r.probs)
 
 
 if __name__ == '__main__':
