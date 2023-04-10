@@ -109,8 +109,12 @@ def processVideo(video_path, retDir, filename):
     results = v8model(video_path, stream=True)
     for r in results:
         rr = r.boxes
-        tmp = [len(rr.boxes), int(rr.cls[0].item()),
-               rr.conf[0].item(), rr.cls.tolist()]
+        cls = -1
+        con = -1
+        if len(rr.cls):
+            cls = int(rr.cls[0].item())
+            con = rr.conf[0].item()
+        tmp = [len(rr.boxes), cls, con, rr.cls.tolist()]
         ret.append(tmp)
 
     saveRet(ret, video_path, retDir)
@@ -133,8 +137,8 @@ def processVideos(videoDir, framesDir, retDir):
             print("目的文件路径为", dir_path)
 
             if os.path.exists(dir_path):
-                # continue
-                os.rename(dir_path, dir_path + '.bak.' + str(time.time()))
+                continue
+                #os.rename(dir_path, dir_path + '.bak.' + str(time.time()))
             os.makedirs(dir_path)
 
             arr = getKeyFrames(source_path, dir_path)
