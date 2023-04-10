@@ -8,7 +8,6 @@ import os
 import sys
 #from getFrames import getBatchFramesFromSingleVideo
 from twoSteps import processVideoKeyFrames
-from oneStep import processVideoKeyFramesByOne
 
 
 def exponential_smoothing(alpha, s):
@@ -230,39 +229,6 @@ def getCorpedFrames(videoDir, framesDir):
         './results/framesStatistics.csv')
 
 
-def oneStepProcess(videoDir, framesDir):
-    framesArr = []
-
-    for root, dirs, files in os.walk(videoDir):
-        for file in sorted(files):
-            source_path = os.path.join(root, file)
-            dir_path = framesDir + os.path.splitext(file)[0]  # + '/'
-
-            print("源文件目录为", root)
-            print("源文件路径为", source_path)
-            print("目的文件路径为", dir_path)
-
-            if os.path.exists(dir_path):
-                # continue
-                os.rename(dir_path, dir_path + '.bak.' + str(time.time()))
-            os.makedirs(dir_path)
-
-            kfg = KeyFrameGetter(source_path, dir_path, 100)
-            a = time.time()
-            kfg.load_diff_between_frm(alpha=0.07)  # 获取模型参数
-            print(kfg.idx)
-
-            frameNum = processVideoKeyFramesByOne(
-                source_path, kfg.idx, dir_path)
-            framesArr.append([file, frameNum])
-
-            kfg.plot_diff_time()
-    cols = ['file', 'count']
-    df = pd.DataFrame(framesArr, columns=cols)
-    df.to_csv(
-        './results/framesStatistics.csv')
-
-
 if __name__ == '__main__':
 
     videoDir = sys.argv[1]
@@ -271,4 +237,3 @@ if __name__ == '__main__':
     #videoDir = '/content/video'
     framesDir = './img/'
     print('framesDir: ', framesDir)
-    oneStepProcess(videoDir, framesDir)
