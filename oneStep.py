@@ -88,10 +88,10 @@ def processVideoByKeyFrames(video_path, retDir, frames, dir_path):
 
     for frame in frames:
         print('frame no:', frame)
-        cap.set(cv2.CAP_PROP_POS_FRAMES, frame)
+        cap.set(cv2.CAP_PROP_POS_FRAMES, frame - 1)
         ret_val, img = cap.read()
         # 可存储
-        if len(img):
+        if ret_val:
             path = os.path.join(dir_path, str(frame) + '.jpg')
             cv2.imwrite(path, img)
 
@@ -171,7 +171,7 @@ def fuseLastFrame(arr, videoPath):
     frames = getVideo(videoPath)
 
     if arr[-1] < frames:
-        arr.append(frames - 1)
+        arr.append(frames)
     return arr
 
 
