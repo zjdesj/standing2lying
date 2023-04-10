@@ -19,7 +19,7 @@ def getVideo(videoPath):
     print('fps = ', fps)
     print('frames = ', frames)
     print('--- end: video 信息：')
-    return [cap, frames]
+    return frames
 
 
 def saveRet(data, videoPath):
@@ -115,7 +115,9 @@ def processVideos(videoDir, framesDir, retDir):
                 os.rename(dir_path, dir_path + '.bak.' + str(time.time()))
             os.makedirs(dir_path)
 
-            getKeyFrames(source_path, dir_path)
+            arr = getKeyFrames(source_path, dir_path)
+            keyFrames = fuseLastFrame(arr, source_path)
+            print('keyFrames :', keyFrames)
 
             processVideo(source_path, retDir, filename)
 
@@ -126,6 +128,14 @@ def getKeyFrames(source_path, dir_path):
     kfg.load_diff_between_frm(alpha=0.07)  # 获取模型参数
     print(kfg.idx)
     return kfg.idx
+
+
+def fuseLastFrame(arr, videoPath):
+    frames = getVideo(videoPath)
+
+    if arr[-1] < frames:
+        arr.append(frames)
+    return arr
 
 
 if __name__ == '__main__':
