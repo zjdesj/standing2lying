@@ -60,7 +60,7 @@ def getModelInstances(confs):
     return confs
 
 
-def processVideoKeyFrames(videoPath, frames, framesDir):
+def processVideoKeyFramesByOne(videoPath, frames, framesDir):
     v8model = getV8()
 
     [cap, frameNum] = getVideo(videoPath)

@@ -8,6 +8,7 @@ import os
 import sys
 #from getFrames import getBatchFramesFromSingleVideo
 from twoSteps import processVideoKeyFrames
+from oneStep import processVideoKeyFramesByOne
 
 
 def exponential_smoothing(alpha, s):
