@@ -68,7 +68,7 @@ def processVideoKeyFramesByOne(videoPath, frames, framesDir):
     return frameNum
 
 
-def saveRet(data, videoPath):
+def saveRet(data, videoPath, retDir):
     name = os.path.splitext(videoPath)[0]
     name = os.path.split(name)[1] + '_' + str(time.time()) + '.csv'
     df = pd.DataFrame(data)
