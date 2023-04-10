@@ -91,9 +91,9 @@ def processVideoByKeyFrames(video_path, retDir, frames, dir_path):
         cap.set(cv2.CAP_PROP_POS_FRAMES, frame)
         ret_val, img = cap.read()
         # 可存储
-        if img:
-          path = os.path.join(dir_path, str(frame) + '.jpg')
-          cv2.imwrite(path, img)
+        if len(img):
+            path = os.path.join(dir_path, str(frame) + '.jpg')
+            cv2.imwrite(path, img)
 
         [results] = v8model(img)
 
