@@ -71,6 +71,7 @@ def processVideoKeyFramesByOne(videoPath, frames, framesDir):
 def processVideos(videoDir, framesDir):
     v8model = getV8()
     framesArr = []
+    ret = []
     for root, dirs, files in os.walk(videoDir):
         for file in sorted(files):
             source_path = os.path.join(root, file)
@@ -87,11 +88,12 @@ def processVideos(videoDir, framesDir):
 
             a = time.time()
 
-            results = v8model(source_path, stream=True,
-                              save_txt=True, save_conf=True)
+            results = v8model(source_path, stream=True)
             for r in results:
-                print('r.boxes:::', r.boxes)
-                print('r.probs:::', r.probs)
+                first = r.boxes[0]
+                tmp = [len(r.boxes), first[4], first[5], r.boxes]
+                print('daaas', tmp)
+                ret.append(tmp)
 
 
 if __name__ == '__main__':
