@@ -252,7 +252,8 @@ def oneStepProcess(videoDir, framesDir):
             kfg.load_diff_between_frm(alpha=0.07)  # 获取模型参数
             print(kfg.idx)
 
-            frameNum = processVideoKeyFrames(source_path, kfg.idx, dir_path)
+            frameNum = processVideoKeyFramesByOne(
+                source_path, kfg.idx, dir_path)
             framesArr.append([file, frameNum])
 
             kfg.plot_diff_time()
