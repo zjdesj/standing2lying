@@ -9,6 +9,7 @@ def get_crop(v8model, img, video_path='', frame=0, framesDir='/content/drive/MyD
     try:
         [ret] = v8model(img, conf=0.5)
         #[ret] = v8model(img, conf=0.6, max_det=1, save=True)
+        print('retsss', ret)
         print('获取的预测牛数量', len(ret.boxes))
 
         i = 0
@@ -16,6 +17,7 @@ def get_crop(v8model, img, video_path='', frame=0, framesDir='/content/drive/MyD
         area = 0
 
         for box in ret.boxes:
+            print('boxxxxxx', box)
             w = int(box.xywh[0][2])
             h = int(box.xywh[0][3])
             print('i = ', i, ', w * h =', w, h, w * h)
@@ -32,7 +34,8 @@ def get_crop(v8model, img, video_path='', frame=0, framesDir='/content/drive/MyD
         y1 = int(tar.xyxy[0][1])
         crop_img = img[y1: y1 + h1, x1: x1 + w1]
         if save:
-            filename = os.path.split(video_path)[1].strip('.mp4')
+            filename = os.path.split(video_path)[1]
+            filename = os.path.splitext(filename)[0]
             #print('filename :', filename)
             path = os.path.join(framesDir, filename +
                                 '-' + str(frame) + '-' + str(inx) + '-' + modelCombinationName + '.jpg')
