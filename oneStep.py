@@ -68,8 +68,34 @@ def processVideoKeyFramesByOne(videoPath, frames, framesDir):
     return frameNum
 
 
-def processVideos(videoDir, framesDir, retDir):
+def saveRet(data, videoPath):
+    name = os.path.splitext(videoPath)[0]
+    name = os.path.split(name)[1] + '_' + str(time.time()) + '.csv'
+    df = pd.DataFrame(data)
+    saveFileName = os.path.join(retDir, name)
+    print('saved file\'s name:', saveFileName)
+    df.to_csv(saveFileName)
+
+
+def processVideo(video_path, retDir, filename):
+    a = time.time()
     v8model = getV8()
+    ret = []
+
+    results = v8model(video_path, stream=True)
+    for r in results:
+        rr = r.boxes
+        tmp = [len(rr.boxes), int(rr.cls[0].item()),
+               rr.conf[0].item(), rr.cls.tolist()]
+        ret.append(tmp)
+
+    saveRet(ret, video_path, retDir)
+
+    b = time.time()
+    print("总耗时: {:.2f}秒".format(b - a))
+
+
+def processVideos(videoDir, framesDir, retDir):
     framesArr = []
     ret = []
     for root, dirs, files in os.walk(videoDir):
@@ -87,20 +113,7 @@ def processVideos(videoDir, framesDir, retDir):
                 os.rename(dir_path, dir_path + '.bak.' + str(time.time()))
             os.makedirs(dir_path)
 
-            a = time.time()
-
-            results = v8model(source_path, stream=True)
-            for r in results:
-                rr = r.boxes
-                tmp = [len(rr.boxes), int(rr.cls[0].item()),
-                       rr.conf[0].item(), rr.cls.tolist()]
-                ret.append(tmp)
-
-            df = pd.DataFrame(ret)
-            saveFileName = os.path.join(
-                retDir, filename + '_' + str(time.time()) + '.csv')
-            print('saveFileName csv:', saveFileName)
-            df.to_csv(saveFileName)
+            processVideo(source_path, retDir, filename)
 
 
 if __name__ == '__main__':
