@@ -79,7 +79,7 @@ def saveRet(data, videoPath, retDir):
     df.to_csv(saveFileName)
 
 
-def processVideoByKeyFrames(video_path, retDir, frames):
+def processVideoByKeyFrames(video_path, retDir, frames, dir_path):
     a = time.time()
     v8model = getV8()
     ret = []
@@ -91,14 +91,18 @@ def processVideoByKeyFrames(video_path, retDir, frames):
         cap.set(cv2.CAP_PROP_POS_FRAMES, frame)
         ret_val, img = cap.read()
         # 可存储
+        path = os.path.join(dir_path, str(frame) + '.jpg')
+        cv2.imwrite(path, img)
+
         [results] = v8model(img)
+
         rr = results.boxes
         cls = -1
         con = -1
         if len(rr.cls):
             cls = int(rr.cls[0].item())
             con = rr.conf[0].item()
-        tmp = [len(rr.boxes), cls, con, rr.cls.tolist()]
+        tmp = [frame, len(rr.boxes), cls, con, rr.cls.tolist()]
 
         ret.append(tmp)
     saveRet(ret, video_path, retDir)
@@ -151,7 +155,7 @@ def processVideos(videoDir, framesDir, retDir):
             print('keyFrames :', keyFrames)
 
             #processVideo(source_path, retDir, filename)
-            processVideoByKeyFrames(source_path, retDir, keyFrames)
+            processVideoByKeyFrames(source_path, retDir, keyFrames, dir_path)
 
 
 def getKeyFrames(source_path, dir_path):
