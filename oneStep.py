@@ -161,11 +161,10 @@ def fuseLastFrame(arr, videoPath):
 
 
 if __name__ == '__main__':
-    #videoDir = sys.argv[1]
+    videoDir = sys.argv[1]
     # 需要确定的地址
     #videoDir = '/content/drive/MyDrive/bi-seq-202302/videos/316videos/me'
-    videoDir = './video'
+    #videoDir = './video'
     framesDir = './img/'
     retDir = './results/'
-    print('framesDir: ', framesDir)
     processVideos(videoDir, framesDir, retDir)
