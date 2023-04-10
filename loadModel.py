@@ -5,7 +5,7 @@ from keras.models import load_model
 
 
 # def getV8(path='./weight/best317v8.pt'):
-def getV8(path='/content/drive/MyDrive/bi-seq-202302/standing2lying/weight/best330v8.pt'):
+def getV8(path='/content/drive/MyDrive/bi-seq-202302/standing2lying/weight/best410v8.pt'):
     print('yolo model weight路径', path)
     return YOLO(path)
 

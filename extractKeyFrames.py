@@ -269,4 +269,4 @@ if __name__ == '__main__':
     #videoDir = '/content/video'
     framesDir = '/content/drive/MyDrive/bi-seq-202302/standing2lying/img-final/'
     print('framesDir: ', framesDir)
-    getCorpedFrames(videoDir, framesDir)
+    oneStepProcess(videoDir, framesDir)
