@@ -226,7 +226,7 @@ def getCorpedFrames(videoDir, framesDir):
     cols = ['file', 'count']
     df = pd.DataFrame(framesArr, columns=cols)
     df.to_csv(
-        '/content/drive/MyDrive/bi-seq-202302/standing2lying/results-final/framesStatistics.csv')
+        './results/framesStatistics.csv')
 
 
 def oneStepProcess(videoDir, framesDir):
@@ -258,7 +258,7 @@ def oneStepProcess(videoDir, framesDir):
     cols = ['file', 'count']
     df = pd.DataFrame(framesArr, columns=cols)
     df.to_csv(
-        '/content/drive/MyDrive/bi-seq-202302/standing2lying/results-final/framesStatistics.csv')
+        './results/framesStatistics.csv')
 
 
 if __name__ == '__main__':
@@ -267,6 +267,6 @@ if __name__ == '__main__':
     # 需要确定的地址
     #videoDir = '/content/drive/MyDrive/bi-seq-202302/videos/316videos/me'
     #videoDir = '/content/video'
-    framesDir = '/content/drive/MyDrive/bi-seq-202302/standing2lying/img-final/'
+    framesDir = './img'
     print('framesDir: ', framesDir)
     oneStepProcess(videoDir, framesDir)

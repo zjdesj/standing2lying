@@ -49,7 +49,7 @@ def saveRet(data, videoPath):
     cols = cols + ['time']
     df = pd.DataFrame(data, columns=cols)
     df.to_csv(
-        '/content/drive/MyDrive/bi-seq-202302/standing2lying/result-one/' + name)
+        './results/' + name)
 
 
 def getModelInstances(confs):
