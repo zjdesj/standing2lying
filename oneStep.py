@@ -75,7 +75,8 @@ def processVideos(videoDir, framesDir):
     for root, dirs, files in os.walk(videoDir):
         for file in sorted(files):
             source_path = os.path.join(root, file)
-            dir_path = framesDir + os.path.splitext(file)[0]  # + '/'
+            filename = os.path.splitext(file)[0]
+            dir_path = framesDir + filename  # + '/'
 
             print("源文件目录为", root)
             print("源文件路径为", source_path)
@@ -90,10 +91,17 @@ def processVideos(videoDir, framesDir):
 
             results = v8model(source_path, stream=True)
             for r in results:
-                first = r.boxes[0]
-                tmp = [len(r.boxes), first[4], first[5], r.boxes]
+                rr = r.boxes
+                tmp = [len(rr.boxes), int(rr.cls[0].item()),
+                       rr.conf[0].item(), rr.boxes.tolist()]
                 print('daaas', tmp)
                 ret.append(tmp)
+
+            df = pd.DataFrame(ret)
+            saveFileName = os.path.join(
+                framesDir, filename + '_' + str(time.time()) + '.csv')
+            print('saveFileName csv:', saveFileName)
+            df.to_csv(saveFileName)
 
 
 if __name__ == '__main__':
