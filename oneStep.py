@@ -6,9 +6,7 @@ import numpy as np
 import time
 
 from crop import get_crop
-from loadModel import getV8, loadResnet
-from getFrames import getFrame
-from keras.utils import img_to_array
+from loadModel import getV8
 
 
 def getVideo(videoPath):
@@ -22,25 +20,6 @@ def getVideo(videoPath):
     return [cap, frames]
 
 
-def img2Array(img):
-    if len(img):
-        #img1 = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        #img2 = cv2.resize(img, (224, 224), interpolation=cv2.INTER_AREA)
-        img2 = cv2.resize(img, (224, 224), interpolation=cv2.INTER_NEAREST)
-
-        x = img_to_array(img2)
-        #x = np.expand_dims(img2, axis=2).repeat(3, axis=2)
-        x = np.expand_dims(x, axis=0)
-        return x
-    return []
-
-
-def getImgArray(v8model, img):
-    img0 = get_crop(v8model, img)
-
-    return img2Array(img0)
-
-
 def saveRet(data, videoPath):
     name = os.path.splitext(videoPath)[0]
     name = os.path.split(name)[1] + '_' + str(time.time()) + '.csv'
@@ -52,12 +31,11 @@ def saveRet(data, videoPath):
         './results/' + name)
 
 
-def getModelInstances(confs):
-    for conf in confs:
-        print(conf["yolo"], conf["resnet"])
-        conf["yolo"] = getV8(conf["yolo"])
-        conf["resnet"] = loadResnet(conf["resnet"])
-    return confs
+def getFrame(v8model, num, cap):
+    print('--当前帧---', num)
+    cap.set(cv2.CAP_PROP_POS_FRAMES, num)
+    ret_val, img0 = cap.read()
+    return img0
 
 
 def processVideoKeyFramesByOne(videoPath, frames, framesDir):
@@ -73,7 +51,9 @@ def processVideoKeyFramesByOne(videoPath, frames, framesDir):
         item = [frame]
         start_time = time.time()
 
-        getFrame(v8model, frame, cap, videoPath, framesDir)
+        img = getFrame(v8model, frame, cap)
+        v8ret = v8model(img)
+        print(v8ret)
 
         end_time = time.time()
         item.append(end_time - start_time)

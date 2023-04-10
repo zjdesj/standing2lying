@@ -243,8 +243,8 @@ def oneStepProcess(videoDir, framesDir):
             print("目的文件路径为", dir_path)
 
             if os.path.exists(dir_path):
-                continue
-                #os.rename(dir_path, dir_path + '.bak.' + str(time.time()))
+                # continue
+                os.rename(dir_path, dir_path + '.bak.' + str(time.time()))
             os.makedirs(dir_path)
 
             kfg = KeyFrameGetter(source_path, dir_path, 100)
@@ -269,6 +269,6 @@ if __name__ == '__main__':
     # 需要确定的地址
     #videoDir = '/content/drive/MyDrive/bi-seq-202302/videos/316videos/me'
     #videoDir = '/content/video'
-    framesDir = './img'
+    framesDir = './img/'
     print('framesDir: ', framesDir)
     oneStepProcess(videoDir, framesDir)
