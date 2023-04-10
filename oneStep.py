@@ -68,7 +68,7 @@ def processVideoKeyFramesByOne(videoPath, frames, framesDir):
     return frameNum
 
 
-def processVideos(videoDir, framesDir):
+def processVideos(videoDir, framesDir, retDir):
     v8model = getV8()
     framesArr = []
     ret = []
@@ -93,13 +93,12 @@ def processVideos(videoDir, framesDir):
             for r in results:
                 rr = r.boxes
                 tmp = [len(rr.boxes), int(rr.cls[0].item()),
-                       rr.conf[0].item(), rr.boxes.tolist()]
-                print('daaas', tmp)
+                       rr.conf[0].item(), rr.cls.tolist()]
                 ret.append(tmp)
 
             df = pd.DataFrame(ret)
             saveFileName = os.path.join(
-                framesDir, filename + '_' + str(time.time()) + '.csv')
+                retDir, filename + '_' + str(time.time()) + '.csv')
             print('saveFileName csv:', saveFileName)
             df.to_csv(saveFileName)
 
@@ -110,5 +109,6 @@ if __name__ == '__main__':
     #videoDir = '/content/drive/MyDrive/bi-seq-202302/videos/316videos/me'
     videoDir = './video'
     framesDir = './img/'
+    retDir = './results/'
     print('framesDir: ', framesDir)
-    processVideos(videoDir, framesDir)
+    processVideos(videoDir, framesDir, retDir)
