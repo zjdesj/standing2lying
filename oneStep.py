@@ -8,6 +8,8 @@ import time
 from crop import get_crop
 from loadModel import getV8
 
+from extractKeyFrames import KeyFrameGetter
+
 
 def getVideo(videoPath):
     cap = cv2.VideoCapture(videoPath)
@@ -113,7 +115,17 @@ def processVideos(videoDir, framesDir, retDir):
                 os.rename(dir_path, dir_path + '.bak.' + str(time.time()))
             os.makedirs(dir_path)
 
+            getKeyFrames(source_path, dir_path)
+
             processVideo(source_path, retDir, filename)
+
+
+def getKeyFrames(source_path, dir_path):
+    kfg = KeyFrameGetter(source_path, dir_path, 100)
+    a = time.time()
+    kfg.load_diff_between_frm(alpha=0.07)  # 获取模型参数
+    print(kfg.idx)
+    return kfg.idx
 
 
 if __name__ == '__main__':
