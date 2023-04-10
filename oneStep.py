@@ -52,8 +52,9 @@ def processVideoKeyFramesByOne(videoPath, frames, framesDir):
         start_time = time.time()
 
         img = getFrame(v8model, frame, cap)
-        v8ret = v8model(img)
-        print(v8ret)
+        [v8ret] = v8model(img)
+        print(v8ret.boxes)
+        print(v8ret.probs)
 
         end_time = time.time()
         item.append(end_time - start_time)
