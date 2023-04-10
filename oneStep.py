@@ -156,7 +156,7 @@ def fuseLastFrame(arr, videoPath):
     frames = getVideo(videoPath)
 
     if arr[-1] < frames:
-        arr.append(frames)
+        arr.append(frames - 1)
     return arr
 
 
