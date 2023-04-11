@@ -209,13 +209,13 @@ def precessKeyFrames(framesDir, retDir):
 
 if __name__ == '__main__':
     videoDir = sys.argv[1]
-    type = sys.argv[2]
+    types = sys.argv[2]
     # 需要确定的地址
     #videoDir = '/content/drive/MyDrive/bi-seq-202302/videos/316videos/me'
     #videoDir = './video'
     framesDir = './img/'
     retDir = './results-2/'
-    if type == 2:
+    if types == 2:
         precessKeyFrames(videoDir, retDir)
     else:
         processVideos(videoDir, framesDir, retDir)
