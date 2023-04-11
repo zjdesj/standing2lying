@@ -117,6 +117,7 @@ def processVideoByKeyFramesDir(framesDir, retDir):
     ret = []
 
     frames = os.listdir(framesDir)
+    print('ffff.f..f.fl', framesDir, frames)
 
     for frame in frames:
         print('frame no:', frame)
