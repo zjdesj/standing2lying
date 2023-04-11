@@ -111,6 +111,32 @@ def processVideoByKeyFrames(video_path, retDir, frames, dir_path):
     print("总耗时: {:.2f}秒".format(b - a))
 
 
+def processVideoByKeyFramesDir(framesDir, retDir):
+    a = time.time()
+    v8model = getV8()
+    ret = []
+
+    frames = os.listdir(framesDir)
+
+    for frame in frames:
+        print('frame no:', frame)
+        path = os.path.join(framesDir, frame)
+        [results] = v8model(path)
+
+        rr = results.boxes
+        cls = -1
+        con = -1
+        if len(rr.cls):
+            cls = int(rr.cls[0].item())
+            con = rr.conf[0].item()
+        tmp = [frame, len(rr.boxes), cls, con, rr.cls.tolist()]
+
+        ret.append(tmp)
+    saveRet(ret, framesDir, retDir)
+    b = time.time()
+    print("总耗时: {:.2f}秒".format(b - a))
+
+
 def processVideo(video_path, retDir, filename):
     a = time.time()
     v8model = getV8()
@@ -173,6 +199,11 @@ def fuseLastFrame(arr, videoPath):
     if arr[-1] < frames:
         arr.append(frames)
     return arr
+
+
+def precessKeyFrames(framesDir, retDir):
+    for dir in os.listdir(framesDir):
+        processVideoByKeyFramesDir(os.path.join(framesDir, dir), retDir)
 
 
 if __name__ == '__main__':
