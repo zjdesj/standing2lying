@@ -116,8 +116,8 @@ def processVideoByKeyFramesDir(framesDir, retDir):
     v8model = getV8()
     ret = []
 
-    frames = os.listdir(framesDir)
     print('ffff.f..f.fl', framesDir, frames)
+    frames = os.listdir(framesDir)
 
     for frame in frames:
         print('frame no:', frame)
