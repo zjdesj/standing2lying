@@ -215,7 +215,7 @@ if __name__ == '__main__':
     #videoDir = './video'
     framesDir = './img/'
     retDir = './results/'
-    if types == 2:
+    if types == 'key':
         precessKeyFrames(videoDir, retDir)
     else:
         processVideos(videoDir, framesDir, retDir)
