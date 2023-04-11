@@ -202,6 +202,7 @@ def fuseLastFrame(arr, videoPath):
 
 
 def precessKeyFrames(framesDir, retDir):
+    print('os.listdir(framesDir)', os.listdir(framesDir))
     for dir in os.listdir(framesDir):
         processVideoByKeyFramesDir(os.path.join(framesDir, dir), retDir)
 
