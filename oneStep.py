@@ -214,7 +214,7 @@ if __name__ == '__main__':
     #videoDir = '/content/drive/MyDrive/bi-seq-202302/videos/316videos/me'
     #videoDir = './video'
     framesDir = './img/'
-    retDir = './results-2/'
+    retDir = './results/'
     if types == 2:
         precessKeyFrames(videoDir, retDir)
     else:
