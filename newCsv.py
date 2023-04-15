@@ -52,6 +52,9 @@ for f in fs:
     val = df.values
     frames = val[:, 1]
     mname = getName(f)
+    print('!!!mname', mname)
+    print("os.path.join('/content/videos/', mname + '.mp4')",
+          os.path.join('/content/videos/', mname + '.mp4'))
     cap = cv2.VideoCapture(os.path.join('/content/videos/', mname + '.mp4'))
     for frame in frames:
         #img = getFrame(frame, cap)
