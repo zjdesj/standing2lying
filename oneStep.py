@@ -91,9 +91,9 @@ def processVideoByKeyFrames(video_path, retDir, frames, dir_path):
         cap.set(cv2.CAP_PROP_POS_FRAMES, frame - 1)
         ret_val, img = cap.read()
         # 可存储
-        if ret_val:
-            path = os.path.join(dir_path, str(frame) + '.jpg')
-            cv2.imwrite(path, img)
+        # if ret_val:
+        #    path = os.path.join(dir_path, str(frame) + '.jpg')
+        #    cv2.imwrite(path, img)
 
         [results] = v8model(img)
 
@@ -214,7 +214,7 @@ if __name__ == '__main__':
     #videoDir = '/content/drive/MyDrive/bi-seq-202302/videos/316videos/me'
     #videoDir = './video'
     framesDir = './img/'
-    retDir = './results/'
+    retDir = './results/DD1-9389-22'
     if types == 'key':
         precessKeyFrames(videoDir, retDir)
     else:
