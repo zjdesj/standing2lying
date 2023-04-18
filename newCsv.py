@@ -5,7 +5,7 @@ import cv2
 import re
 import time
 from ultralytics import YOLO
-dpath = '/content/s2l/standing2lying/results/D07-23'
+dpath = '/content/s2l/standing2lying/results/D02-23'
 # os.chdir('/content/drive/MyDrive/bi-seq-202302/standing2lying')
 
 
@@ -71,4 +71,4 @@ for f in fs:
             tmp = [frame, len(rr.boxes), cls, con, rr.cls.tolist()]
         ret.append(tmp)
 
-    saveRet(ret, '/content/s2l/standing2lying/results/DD07-23/' + mname + '.csv')
+    saveRet(ret, '/content/s2l/standing2lying/results/DD02-23/' + mname + '.csv')
